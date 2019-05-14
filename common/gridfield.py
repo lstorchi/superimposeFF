@@ -83,10 +83,10 @@ def read_splitted_contrib_csv(filename):
                             ax, ay, az, 100.0))
                     tot += 100.0
 
-            if tot != 0.0 and math.fabs(100.0 - tot) > 10.0:
-                print "Error in total percentage ", math.fabs(100.0 - tot)
-                print "    with ", atomnum
-                exit(1)
+            #if tot != 0.0 and math.fabs(100.0 - tot) > 2.0:
+            #    print "Error in total percentage ", math.fabs(100.0 - tot)
+            #    print "    with ", atomnum
+            #    exit(1)
 
             index = "%.3f_%.3f_%.3f"%(x, y, z)
             energylist[index] = newe
@@ -145,7 +145,7 @@ def read_kontfile (kontname):
   nx = ny = nz = 0
   ix = iy = iz = 0
   for l in fk:
- 
+
     if "HEADER" in l:
       switchtofieldm = True 
       nx = len(xsets)
@@ -186,7 +186,18 @@ def read_kontfile (kontname):
         line = p.sub(' ', l)
         line = line.lstrip()
         line = line.rstrip()
-        n, x, y, z = line.split(" ")
+        n = ""
+        x = ""
+        y = ""
+        z = ""
+
+        if len(line.split(" ")) < 4:
+            n = l[:7]
+            x = l[8:16]
+            y = l[17:24]
+            z = l[25:]
+        else:
+            n, x, y, z = line.split(" ")
     
         xsets.add(float(x))
         ysets.add(float(y))
@@ -218,7 +229,19 @@ def read_kontfile (kontname):
               line = p.sub(' ', l)
               line = line.lstrip()
               line = line.rstrip()
-              n, x, y, z = line.split(" ")
+
+              n = ""
+              x = ""
+              y = ""
+              z = ""
+
+              if len(line.split(" ")) < 4:
+                  n = l[:7]
+                  x = l[8:16]
+                  y = l[17:24]
+                  z = l[25:]
+              else:
+                  n, x, y, z = line.split(" ")
 
               coords[ix, iy, iz] = (float(x), float(y), float(z), int(n))
 

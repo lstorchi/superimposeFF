@@ -33,7 +33,7 @@ csvname = ""
 if (len(sys.argv)) == 2:
     csvname = sys.argv[1]
 else:
-    print "usage :", sys.argv[0] , " filename.csv "
+    print("usage :", sys.argv[0] , " filename.csv ")
     exit(1)
 
 fp = open(csvname, "r")
@@ -47,7 +47,7 @@ for l in fp:
         #print all_atoms
         sum_and_dump (all_atoms)
         all_atoms = {}
-        print sline[0].rstrip().lstrip(), " , ", sline[1].rstrip().lstrip()
+        print(sline[0].rstrip().lstrip(), " , ", sline[1].rstrip().lstrip())
     else:
         first_atom = sline[0].rstrip()
         first_atom = first_atom.lstrip()

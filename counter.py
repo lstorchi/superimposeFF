@@ -15,7 +15,7 @@ if (len(sys.argv)) == 3:
     pdbfilename = sys.argv[2]                        
 else:
                                 
-    print ("usage :" + sys.argv[0] + " filename.kont filename.pdb ")
+    print(("usage :" + sys.argv[0] + " filename.kont filename.pdb "))
     exit(1)
 
 energy, energy_coords, \
@@ -24,7 +24,7 @@ energy, energy_coords, \
 
 coords = []
 radii = []
-mol = pybel.readfile("pdb", pdbfilename).next()
+mol = next(pybel.readfile("pdb", pdbfilename))
 pt = openbabel.OBElementTable()
 for atom in mol:
     coords.append(atom.coords)

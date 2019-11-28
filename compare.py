@@ -18,7 +18,7 @@ if (len(sys.argv)) == 3:
     pdbfilename = sys.argv[2]                        
 else:
                                 
-    print "usage :", sys.argv[0] , " filename.kont filename.pdb "
+    print("usage :", sys.argv[0] , " filename.kont filename.pdb ")
     exit(1)
 
 energy, energy_coords, \
@@ -28,7 +28,7 @@ energy, energy_coords, \
 coords = []
 radii = []
 atomuniqid = []
-mol = pybel.readfile("pdb", pdbfilename).next()
+mol = next(pybel.readfile("pdb", pdbfilename))
 pt = openbabel.OBElementTable()
 for atom in mol:
     coords.append(atom.coords)
@@ -123,7 +123,7 @@ for iy in range(energy_coords.shape[1]):
                 if mindistai >= 0:
                     peratom_counter[mindistai] += 1
                 else:
-                    print "Error"
+                    print("Error")
                     exit(1)
 
             elif partialconter  == 1:
@@ -133,23 +133,23 @@ for iy in range(energy_coords.shape[1]):
 
             counter += partialconter
 
-print kontfilename, " ", pdbfilename, " ,", counter, " , " , counter_multiple
+print(kontfilename, " ", pdbfilename, " ,", counter, " , " , counter_multiple)
 
 sum = 0
 sum_multiple = 0
 for ai in range(len(peratom_counter_multiple)):
     if peratom_counter[ai] > 0:
-      print ai+1, " , ", atomuniqid[ai], " , ", \
+      print(ai+1, " , ", atomuniqid[ai], " , ", \
               peratom_counter_multiple[ai], " , ", \
-              peratom_counter[ai]
+              peratom_counter[ai])
     sum_multiple += peratom_counter_multiple[ai]
     sum += peratom_counter[ai]
 
 if sum_multiple != counter_multiple:
-    print "Error in Tot: ", sum_multiple, " vs ", counter_multiple
+    print("Error in Tot: ", sum_multiple, " vs ", counter_multiple)
 
 if sum != counter:
-    print "Error in Tot: ", sum, " vs ", counter
+    print("Error in Tot: ", sum, " vs ", counter)
 
 if usevtk:
    actors = []

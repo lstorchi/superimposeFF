@@ -20,7 +20,7 @@ if (len(sys.argv)) == 5:
     csvfilename = sys.argv[3]
     fieldpdbname = sys.argv[4]
 else:
-    print ("usage :" + sys.argv[0] + " filename1.kont filename2.pdb filename1.csv filename1.pdb")
+    print(("usage :" + sys.argv[0] + " filename1.kont filename2.pdb filename1.csv filename1.pdb"))
     print ("       filename1.pdb is used to well identify atomname and residue")
     exit(1)
 
@@ -35,7 +35,7 @@ energy, energy_coords, \
 coords = []
 radii = []
 atomuniqid = []
-mol = pybel.readfile("pdb", pdbfilename).next()
+mol = next(pybel.readfile("pdb", pdbfilename))
 pt = openbabel.OBElementTable()
 for atom in mol:
     coords.append(atom.coords)
@@ -47,7 +47,7 @@ for atom in mol:
 coords_map = {}
 coords_field_pdb = []
 atomuniqid_field_pdb = []
-mol_field_pdb = pybel.readfile("pdb", fieldpdbname).next()
+mol_field_pdb = next(pybel.readfile("pdb", fieldpdbname))
 pt_field_pdb = openbabel.OBElementTable()
 for atom in mol_field_pdb:
     uniqid = str(atom.OBAtom.GetType())+"_"+\
@@ -75,7 +75,7 @@ for ai in range(len(coords)):
     peratom_counter.append(0)
     peratom_counter_multiple.append(0)
 
-print kontfilename, " , ", pdbfilename
+print(kontfilename, " , ", pdbfilename)
 
 for iy in range(energy_coords.shape[1]):
     for ix in range(energy_coords.shape[0]):
@@ -148,12 +148,12 @@ for iy in range(energy_coords.shape[1]):
                         #stringa += str(e)
                         
                         if math.fabs(tot - 100.0) > 10.0:
-                            print "Error in total perc"
+                            print("Error in total perc")
                             exit(1)
 
-                        print stringa
+                        print(stringa)
                 else:
-                    print "Error"
+                    print("Error")
                     exit(1)
 
             elif partialconter  == 1:
@@ -190,10 +190,10 @@ for iy in range(energy_coords.shape[1]):
                             #stringa += str(e)
                             
                             if math.fabs(tot - 100.0) > 10.0:
-                                print "Error in total perc"
+                                print("Error in total perc")
                                 exit(1)
                         
-                            print stringa
+                            print(stringa)
  
             counter += partialconter
 
@@ -208,7 +208,7 @@ for ai in range(len(peratom_counter_multiple)):
     sum += peratom_counter[ai]
 
 if sum_multiple != counter_multiple:
-    print "Error in Tot: ", sum_multiple, " vs ", counter_multiple
+    print("Error in Tot: ", sum_multiple, " vs ", counter_multiple)
 
 if sum != counter:
-    print "Error in Tot: ", sum, " vs ", counter
+    print("Error in Tot: ", sum, " vs ", counter)

@@ -3,7 +3,6 @@ import subprocess
 import openbabel
 import numpy 
 import pybel
-import sets
 import math
 import re
 import os
@@ -135,9 +134,9 @@ def read_kontfile (kontname):
  
   fk = open(kontname)
  
-  xsets = sets.Set()
-  ysets = sets.Set()
-  zsets = sets.Set()
+  xsets = set()
+  ysets = set()
+  zsets = set()
   switchtofieldm = False
 
   energy = numpy.empty([1,1,1], float)

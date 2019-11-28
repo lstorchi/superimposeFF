@@ -130,7 +130,7 @@ def read_kontfile (kontname):
   dim = (lineamnt - 1)/2
  
   if ((dim * 2) + 1) != lineamnt :
-    print "Maybe invalid kont file"
+    print("Maybe invalid kont file")
     exit(1)
  
   fk = open(kontname)

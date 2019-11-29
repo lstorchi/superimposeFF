@@ -26,14 +26,16 @@ energy2, energy2_coords, \
         _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _  \
         = gridfield.read_kontfile(kontfilename2)
 
+
 mapidx1 = {}
 coords1 = []
 mapidx2 = {}
 coords2 = []
 
 lidx = 0
-for iy in range(energy1_coords.shape[1]):
-    for ix in range(energy1_coords.shape[0]):
+
+for ix in range(energy1_coords.shape[0]):
+    for iy in range(energy1_coords.shape[1]):
         for iz in range(energy1_coords.shape[2]):
 
             if energy1[ix, iy, iz] <= ELIMIT:
@@ -43,8 +45,8 @@ for iy in range(energy1_coords.shape[1]):
                 lidx += 1
 
 lidx = 0
-for iy in range(energy2_coords.shape[1]):
-    for ix in range(energy2_coords.shape[0]):
+for ix in range(energy2_coords.shape[0]):
+    for iy in range(energy2_coords.shape[1]):
         for iz in range(energy2_coords.shape[2]):
 
             if energy2[ix, iy, iz] <= ELIMIT:
@@ -54,30 +56,39 @@ for iy in range(energy2_coords.shape[1]):
                 lidx += 1
 
 
-cdists = scipy.spatial.distance.cdist(coords1, coords2, \
-        metric='euclidean')
-
-#idxs = numpy.argwhere(cdists < 3.0)
-#for v in range(idxs.shape[0]):
-#    i = idxs[v][0]
-#    j = idxs[v][1]
-#    print (i, j , " ==> ", cdists[i, j])
-#    print (energy1_coords[mapidx1[i]], energy1[mapidx1[i]])
-#    print (energy2_coords[mapidx2[j]], energy2[mapidx2[j]])
-
 maxdist = 10
 collection = []
 energies = []
+ 
 
-for id in range(maxdist):
-    idxs = numpy.argwhere(cdists < float(id))
-    collection.append(idxs.shape[0])  
-    energies.append(0.0)
-    for v in range(idxs.shape[0]):
-        i = idxs[v][0]
-        j = idxs[v][1]
-        energies[id] += energy1[mapidx1[i]]
-        energies[id] += energy2[mapidx2[j]]
+if (len(coords1) > 0) and (len(coords2) > 0):
+
+   cdists = scipy.spatial.distance.cdist(coords1, coords2, \
+           metric='euclidean')
+   
+   #idxs = numpy.argwhere(cdists < 3.0)
+   #for v in range(idxs.shape[0]):
+   #    i = idxs[v][0]
+   #    j = idxs[v][1]
+   #    print (i, j , " ==> ", cdists[i, j])
+   #    print (energy1_coords[mapidx1[i]], energy1[mapidx1[i]])
+   #    print (energy2_coords[mapidx2[j]], energy2[mapidx2[j]])
+   
+  
+   for id in range(maxdist):
+       idxs = numpy.argwhere(cdists < float(id))
+       collection.append(idxs.shape[0])  
+       energies.append(0.0)
+       for v in range(idxs.shape[0]):
+           i = idxs[v][0]
+           j = idxs[v][1]
+           energies[id] += energy1[mapidx1[i]]
+           energies[id] += energy2[mapidx2[j]]
+else:
+
+    for id in range(maxdist):
+        energies.append(0.0)
+        collection.append(0)
 
 
 sys.stdout.write (kontfilename1 + " " + kontfilename2 + " , ")

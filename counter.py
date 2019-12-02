@@ -65,7 +65,6 @@ for i, v in enumerate(counter_multiple):
     if i:
         sys.stdout.write(" , ")
     sys.stdout.write(str(v))
-    if i:
-        sys.stdout.write(" , ")
+    sys.stdout.write(" , ")
     sys.stdout.write(" %10.5f "%(energy_multiple[i]))
 sys.stdout.write("\n")

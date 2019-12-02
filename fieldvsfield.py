@@ -96,7 +96,6 @@ for i, v in enumerate(collection):
     if i:
         sys.stdout.write(" , ")
     sys.stdout.write(str(v))
-    if i:
-        sys.stdout.write(" , ")
+    sys.stdout.write(" , ")
     sys.stdout.write(" %10.5f "%(energies[i]))
 sys.stdout.write("\n")

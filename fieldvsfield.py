@@ -6,6 +6,7 @@ sys.path.append("./common")
 import gridfield
 
 ELIMIT = -1.0
+LELIMIT = -0.1
 
 kontfilename1 = ""
 kontfilename2 = ""
@@ -55,6 +56,9 @@ for ix in range(energy2_coords.shape[0]):
                 mapidx2[lidx] = (ix, iy, iz)
                 lidx += 1
 
+
+print(len(coords1))
+print(len(coords2))
 
 maxdist = 10
 collection = []

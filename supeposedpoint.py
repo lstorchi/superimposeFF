@@ -56,8 +56,6 @@ for ix in range(energy2_coords.shape[0]):
                 lidx += 1
 
 
-print(len(coords1))
-print(len(coords2))
 
 maxdist = 10
 collection = []
@@ -69,7 +67,7 @@ if (len(coords1) > 0) and (len(coords2) > 0):
    cdists = scipy.spatial.distance.cdist(coords1, coords2, \
            metric='euclidean')
    
-   idxs = numpy.argwhere(cdists == 0)
+   idxs = numpy.argwhere(cdists == 0.0)
    collection.append(idxs.shape[0])  
    energies.append(0.0)
    for v in range(idxs.shape[0]):

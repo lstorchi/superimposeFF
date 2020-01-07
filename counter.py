@@ -5,7 +5,7 @@ import sys
 sys.path.append("./common")
 import gridfield
 
-ELIMIT = -1.0
+ELIMIT = -0.5
 
 kontfilename = ""
 pdbfilename = ""

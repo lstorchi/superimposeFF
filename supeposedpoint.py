@@ -6,7 +6,6 @@ sys.path.append("./common")
 import gridfield
 
 ELIMIT = -0.5
-LELIMIT = -0.1
 
 kontfilename1 = ""
 kontfilename2 = ""
@@ -57,33 +56,28 @@ for ix in range(energy2_coords.shape[0]):
                 lidx += 1
 
 
+print(len(coords1))
+print(len(coords2))
+
 maxdist = 10
 collection = []
 energies = []
+ 
 
 if (len(coords1) > 0) and (len(coords2) > 0):
 
    cdists = scipy.spatial.distance.cdist(coords1, coords2, \
            metric='euclidean')
    
-   #idxs = numpy.argwhere(cdists < 3.0)
-   #for v in range(idxs.shape[0]):
-   #    i = idxs[v][0]
-   #    j = idxs[v][1]
-   #    print (i, j , " ==> ", cdists[i, j])
-   #    print (energy1_coords[mapidx1[i]], energy1[mapidx1[i]])
-   #    print (energy2_coords[mapidx2[j]], energy2[mapidx2[j]])
-   
-  
-   for id in range(maxdist):
-       idxs = numpy.argwhere(cdists < float(id))
-       collection.append(idxs.shape[0])  
-       energies.append(0.0)
-       for v in range(idxs.shape[0]):
-           i = idxs[v][0]
-           j = idxs[v][1]
-           energies[id] += energy1[mapidx1[i]]
-           energies[id] += energy2[mapidx2[j]]
+   idxs = numpy.argwhere(cdists == 0)
+   collection.append(idxs.shape[0])  
+   energies.append(0.0)
+   for v in range(idxs.shape[0]):
+       i = idxs[v][0]
+       j = idxs[v][1]
+       energies[id] += energy1[mapidx1[i]]
+       energies[id] += energy2[mapidx2[j]]
+
 else:
 
     for id in range(maxdist):
